@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
+import random
 
 load_dotenv()
 
@@ -9,7 +10,7 @@ bot = commands.Bot(command_prefix=".", intents=discord.Intents.all())
 
 @bot.event
 async def on_ready():
-    print("ismDex Bot Online. Ready for action!") # ready command by virtue of GroovyIsTrash
+    print("ismDex Bot Online. Ready for action!") # ready command message by virtue of GroovyIsTrash
 
 @bot.command()
 async def hello(ctx):
@@ -19,6 +20,24 @@ async def hello(ctx):
 async def goodmorning(ctx):
     await ctx.send(f"Good morning, {ctx.author.mention}!")
 
+@bot.command()
+async def github(ctx):
+    await ctx.send("Here is the link to our GitHub Repository: https://github.com/rayaso-0/ismDex_v2")
+
+@bot.command()
+async def touch(ctx):
+    await ctx.send(f"Yes, WE {ctx.author.mention}, are gonna touch jalen :money_mouth:")
+
+@bot.command()
+async def flip(ctx):
+    number = random.randint(1, 2)
+    if number == 1:
+        await ctx.send("Heads!")
+    else:
+        await ctx.send("Tails!")
+    
+
+# EMBED TEMPLATE
 # @bot.command()
 # async def sendembed(ctx):
 #     embeded_msg = discord.Embed(title="Title of embed", description="Description of embed", color=discord.Color.green())
@@ -107,6 +126,19 @@ async def airthyus_bio(ctx):
     
     embeded_msg.add_field(name="Youtube", value="https://www.youtube.com/@Airthyus", inline=True)
     embeded_msg.add_field(name="Twitch", value="https://www.twitch.tv/airthyus", inline=True)
+    
+    await ctx.send(embed=embeded_msg)
+
+@bot.command()
+async def ism_links(ctx):
+    desc = ("")
+    embeded_msg = discord.Embed(title="All IsmIsm links:", description=desc, color=discord.Color.dark_gray())
+ 
+    embeded_msg.add_field(name="Youtube", value="https://www.youtube.com/@ism-ism-squared", inline=False)
+    embeded_msg.add_field(name="Instagram", value="https://www.instagram.com/ismism_squared", inline=False)
+    embeded_msg.add_field(name="Tiktok", value="https://www.tiktok.com/@ismism_squared", inline=False)
+
+    embeded_msg.set_image(url="https://i.imgur.com/j7dRqSh.jpg")
     
     await ctx.send(embed=embeded_msg)
 
