@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 class Test(commands.Cog):
     def __init__(self, bot):
@@ -9,12 +10,12 @@ class Test(commands.Cog):
     async def on_ready(self):
         print(f"{__name__} commands online!")
     
-    @commands.command()
-    async def ping(self, ctx):
+    @app_commands.command(name="ping", description="Checks the bot's latency in ms")
+    async def ping(self, interaction: discord.Interaction):
         ping_embed = discord.Embed(title="Ping", description="Latency in ms", color=discord.Color.blue())
-        ping_embed.add_field(name=f"{self.bot.user.name}'s Latancy (ms): ", value=f"{round(self.bot.latency * 1000)}ms.", inline=False)
-        ping_embed.set_footer(text=f"Requested by {ctx.author.name}.", icon_url=ctx.author.avatar)
-        await ctx.send(embed=ping_embed)
+        ping_embed.add_field(name=f"{self.bot.user.name}'s Latency (ms): ", value=f"{round(self.bot.latency * 1000)}ms.", inline=False)
+        ping_embed.set_footer(text=f"Requested by {interaction.user.name}.", icon_url=interaction.user.display_avatar.url)
+        await interaction.response.send_message(embed=ping_embed)
 
 async def setup(bot):
     await bot.add_cog(Test(bot))

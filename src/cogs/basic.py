@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import random
 
 class Basic(commands.Cog):
@@ -10,29 +11,29 @@ class Basic(commands.Cog):
     async def on_ready(self):
         print(f"{__name__} commands online!")
 
-    @commands.command()
-    async def hello(self, ctx):
-        await ctx.send(f"Hello there, {ctx.author.mention}!")
+    @app_commands.command(name="hello", description="Greets the user")
+    async def hello(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Hello there, {interaction.user.mention}!")
 
-    @commands.command(aliases=["gm", "morning"])
-    async def goodmorning(self, ctx):
-        await ctx.send(f"Good morning, {ctx.author.mention}!")
+    @app_commands.command(name="goodmorning", description="Wish someone a good morning")
+    async def goodmorning(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Good morning, {interaction.user.mention}!")
 
-    @commands.command()
-    async def github(self, ctx):
-        await ctx.send("Here is the link to our GitHub Repository: https://github.com/rayaso-0/ismDex_v2")
+    @app_commands.command(name="github", description="Link to our GitHub Repository")
+    async def github(self, interaction: discord.Interaction):
+        await interaction.response.send_message("Here is the link to our GitHub Repository: https://github.com/rayaso-0/ismDex_v2")
 
-    @commands.command()
-    async def touch(self, ctx):
-        await ctx.send(f"Yes, WE {ctx.author.mention}, are gonna touch jalen :money_mouth:")
+    @app_commands.command(name="touch", description="Touch Jalen")
+    async def touch(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Yes, WE {interaction.user.mention}, are gonna touch jalen :money_mouth:")
 
-    @commands.command()
-    async def flip(self, ctx):
+    @app_commands.command(name="flip", description="Flips a 50/50 fair coin")
+    async def flip(self, interaction: discord.Interaction):
         number = random.randint(1, 2)
         if number == 1:
-            await ctx.send("Heads!")
+            await interaction.response.send_message("Heads!")
         else:
-            await ctx.send("Tails!")
+            await interaction.response.send_message("Tails!")
 
 async def setup(bot):
     await bot.add_cog(Basic(bot))

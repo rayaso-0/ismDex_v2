@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 class Bios(commands.Cog):
     def __init__(self, bot):
@@ -9,8 +10,8 @@ class Bios(commands.Cog):
     async def on_ready(self):
         print(f"{__name__} commands online!")
 
-    @commands.command()
-    async def groovy_bio(self, ctx):
+    @app_commands.command(name="groovy_bio", description="Embed for Groovy's bio")
+    async def groovy_bio(self, interaction: discord.Interaction):
         desc = (
             "Groovy is one of the founding members of IsmIsm.\n"
             "He has always been passionate about content creation and the arts including, "
@@ -29,10 +30,10 @@ class Bios(commands.Cog):
         
         embeded_msg.set_image(url="https://i.imgur.com/MHP9lmb.jpeg")
         
-        await ctx.send(embed=embeded_msg)
+        await interaction.response.send_message(embed=embeded_msg)
 
-    @commands.command()
-    async def jalen_bio(self, ctx):
+    @app_commands.command(name="jalen_bio", description="Embed for Jalen's bio")
+    async def jalen_bio(self, interaction: discord.Interaction):
         desc = (
             "Jalen is one of the founding members of IsmIsm. With a strong\n"
             "passion in gaming, he wants to go further than that and see where\n"
@@ -50,10 +51,10 @@ class Bios(commands.Cog):
         
         embeded_msg.set_image(url="https://i.imgur.com/rNZKe9m.jpeg")
         
-        await ctx.send(embed=embeded_msg)
+        await interaction.response.send_message(embed=embeded_msg)
 
-    @commands.command()
-    async def rayaso_bio(self, ctx):
+    @app_commands.command(name="rayaso_bio", description="Embed for Rayaso's bio")
+    async def rayaso_bio(self, interaction: discord.Interaction):
         desc = (
             "Rayaso is the lead Developer for the ismDex discord bot and one of the Founding\n"
             "Members of IsmIsm. Doing things from recording gameplay with the others or\n"
@@ -71,10 +72,10 @@ class Bios(commands.Cog):
         
         embeded_msg.set_image(url="https://i.imgur.com/5PmuFLR.png")
         
-        await ctx.send(embed=embeded_msg)
+        await interaction.response.send_message(embed=embeded_msg)
 
-    @commands.command()
-    async def airthyus_bio(self, ctx):
+    @app_commands.command(name="airthyus_bio", description="Embed for Airthyus's bio")
+    async def airthyus_bio(self, interaction: discord.Interaction):
         desc = (
             "Airthyus is one of the founding members of IsmIsm.\n"
             "With a strong passion in gaming and math, he wants to go further than that and\n"
@@ -89,10 +90,10 @@ class Bios(commands.Cog):
         embeded_msg.add_field(name="Youtube", value="https://www.youtube.com/@Airthyus", inline=True)
         embeded_msg.add_field(name="Twitch", value="https://www.twitch.tv/airthyus", inline=True)
         
-        await ctx.send(embed=embeded_msg)
+        await interaction.response.send_message(embed=embeded_msg)
 
-    @commands.command()
-    async def ism_links(self, ctx):
+    @app_commands.command(name="ism_links", description="Embed for all IsmIsm socials")
+    async def ism_links(self, interaction: discord.Interaction):
         desc = ("")
         embeded_msg = discord.Embed(title="All IsmIsm links:", description=desc, color=discord.Color.dark_gray())
     
@@ -102,7 +103,7 @@ class Bios(commands.Cog):
 
         embeded_msg.set_image(url="https://i.imgur.com/j7dRqSh.jpg")
         
-        await ctx.send(embed=embeded_msg)
+        await interaction.response.send_message(embed=embeded_msg)
 
 async def setup(bot):
     await bot.add_cog(Bios(bot))
