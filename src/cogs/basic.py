@@ -32,33 +32,31 @@ class Basic(commands.Cog):
             await interaction.response.send_message("Tails!")
 
     @app_commands.command(name="help", description="List of all commands")
-    async def help(self, interaction: discord.Integration):
-        await interaction.response.send_message("Here is a list of every current command:\n"
-                                                "`/hello`\n"
-                                                "`/goodmorning`\n"
-                                                "`/github`\n"
-                                                "`/tos`\n"
-                                                "`/privacypolicy`\n"
-                                                "`/touch`\n"
-                                                "`/flip`\n"
-                                                "`/ping`\n"
-                                                "`/groovy_bio`\n"
-                                                "`/jalen_bio`\n"
-                                                "`/rayaso_bio`\n"
-                                                "`/airthyus_bio`\n"
-                                                "`/ism_links`\n"
-                                                "`/help`\n")
+    async def help(self, interaction: discord.Interaction):
+        commands = self.bot.tree.get_commands()
+        
+        command_list = [f"`/{cmd.name}` - {cmd.description}" for cmd in commands]
+        help_text = "\n".join(command_list)
+
+        embed = discord.Embed(
+            title="Bot Commands Menu",
+            description="Here is a list of everything I can do:\n\n" + help_text,
+            color=discord.Color.blurple()
+        )
+        
+        embed.set_footer(text=f"Requested by {interaction.user.name}", icon_url=interaction.user.display_avatar.url)
+        await interaction.response.send_message(embed=embed)
     
     @app_commands.command(name="github", description="Link to our GitHub Repository")
     async def github(self, interaction: discord.Interaction):
         await interaction.response.send_message("Here is the link to my GitHub Repository: https://github.com/rayaso-0/ismDex_v2")
     
     @app_commands.command(name="tos", description="Link to the ismDex discord bot Terms of Service")
-    async def github(self, interaction: discord.Interaction):
+    async def tos(self, interaction: discord.Interaction):
         await interaction.response.send_message("Here is the link to my Terms of Service: https://github.com/rayaso-0/ismDex_v2/blob/main/TERMS-OF-SERVICE.md")
 
     @app_commands.command(name="privacypolicy", description="Link to the ismDex discord bot Privacy Policy")
-    async def github(self, interaction: discord.Interaction):
+    async def privacypolicy(self, interaction: discord.Interaction):
         await interaction.response.send_message("Here is the link to my Privacy Policy: https://github.com/rayaso-0/ismDex_v2/blob/main/PRIVACYPOLICY.md")
 
 async def setup(bot):
