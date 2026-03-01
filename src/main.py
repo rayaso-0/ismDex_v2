@@ -23,12 +23,12 @@ class MyBot(commands.Bot):
             if filename.endswith('.py') and not filename.startswith('__'):
                 try:
                     await self.load_extension(f"cogs.{filename[:-3]}")
-                    print(f"✅ Successfully loaded cogs.{filename[:-3]}")
+                    print(f"Successfully loaded cogs.{filename[:-3]}")
                 except Exception as e:
-                    print(f"❌ Failed to load cogs.{filename[:-3]}: {e}")
+                    print(f"Failed to load cogs.{filename[:-3]}: {e}")
         
         await self.tree.sync()
-        print("✅ Command tree globally synced to Discord!")
+        print("Command tree globally synced to Discord!")
 
 bot = MyBot()
 

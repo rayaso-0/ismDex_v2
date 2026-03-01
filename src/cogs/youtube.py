@@ -56,7 +56,7 @@ class YouTubeAnnouncer(commands.Cog):
                         
                     if self.latest_videos[name] != video_id:
                         self.latest_videos[name] = video_id
-                        await channel.send(f"🚨 New vid drop!!! \n{video_link} @Grunt")
+                        await channel.send(f"New vid drop!!! \n{video_link} @Grunt")
 
 async def setup(bot):
     await bot.add_cog(YouTubeAnnouncer(bot))
